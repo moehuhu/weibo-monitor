@@ -11,7 +11,16 @@
     "dist"
   ],
   "license": "MIT",
-  "description": "微博动态更新推送插件",
+  "koshi": {
+    "description": {
+      "zh": "微博动态更新推送插件"
+    },
+    "preview": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moehuhu/weibo-monitor.git"
+  },
   "scripts": {},
   "keywords": [
     "chatbot",
