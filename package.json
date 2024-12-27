@@ -1,19 +1,23 @@
 {
   "name": "koishi-plugin-weibo-monitor",
-  "description": "",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "contributors": [
+    "moehuhu <moehuhu@gmail.com>"
+  ],
   "files": [
     "lib",
     "dist"
   ],
   "license": "MIT",
+  "description": "微博动态更新推送插件",
   "scripts": {},
   "keywords": [
     "chatbot",
     "koishi",
-    "plugin"
+    "plugin",
+    "weibo"
   ],
   "devDependencies": {},
   "peerDependencies": {
