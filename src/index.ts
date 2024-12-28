@@ -12,7 +12,7 @@ export interface Config {
 export const Config: Schema<Config> = Schema.object({
   account: Schema.string().description("账号(qq号)"),
   plantform: Schema.string().default("onebot").description("账号平台"),
-  waitMinutes: Schema.number().default(3).description("检查间隔分钟"),
+  waitMinutes: Schema.number().default(3).min(1).description("检查间隔分钟"),
   sendINFO: Schema.array(Schema.object({
     sendAll: Schema.boolean().default(false).description("@全体"),
     weiboUID: Schema.string().description("微博UID"),
