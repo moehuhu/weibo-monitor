@@ -1,6 +1,6 @@
 {
   "name": "koishi-plugin-weibo-monitor",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "contributors": [
@@ -11,6 +11,7 @@
     "dist"
   ],
   "license": "MIT",
+  "description": "微博动态更新推送插件",
   "koshi": {
     "description": {
       "zh": "微博动态更新推送插件"
