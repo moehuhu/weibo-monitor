@@ -1,4 +1,4 @@
-import { Context, Schema, segment } from 'koishi'
+import { Context, Schema } from 'koishi'
 import https from 'https'
 export const name = 'weibo-monitor'
 
@@ -92,7 +92,8 @@ const getMessage = (params: any, latestWeibo: any): string => {
     const picIds = latestWeibo?.pic_ids || []
     const picInfos = latestWeibo?.pic_infos || {}
     const firstPicUrl = picInfos?.[picIds[0]]?.large?.url || ''
-    message += (screenName + " 发布了微博:\n" + text + "\n" + segment.image(firstPicUrl)) || ''
+    const picture = `<img src="${firstPicUrl}"/>`
+    message += (screenName + " 发布了微博:\n" + text + "\n" + picture) || ''
   }
   const mid = latestWeibo?.mid || ''
   const url = `\n链接：https://m.weibo.cn/status/${mid}`
