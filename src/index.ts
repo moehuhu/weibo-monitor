@@ -53,7 +53,6 @@ export function apply(ctx: Context, config: Config) {
       if (params.sendAll) {
         message = '<at id="all"/> ' + message
       }
-      console.log(message)
       ctx.bots[`${config.plantform}:${config.account}`].sendMessage(params.groupID, message)
     }
   }, config.waitMinutes > 0 ? config.waitMinutes * 60 * 1000 : 60000)
