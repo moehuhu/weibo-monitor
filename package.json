@@ -12,6 +12,9 @@
   ],
   "license": "MIT",
   "description": "微博动态更新推送插件",
+  "publishConfig": {
+    "access": "public"
+  },
   "koshi": {
     "description": {
       "zh": "微博动态更新推送插件"
