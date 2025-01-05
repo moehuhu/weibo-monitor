@@ -120,7 +120,7 @@ const getWeibo = async (config: any, callback?: any): Promise<any> => {
     method: "GET",
     headers: headers
   }
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     https.get(options, (res) => {
       let body = ""
       res.on('data', (chunk) => {
@@ -130,6 +130,10 @@ const getWeibo = async (config: any, callback?: any): Promise<any> => {
         const returnData = JSON.parse(body);
         callback?.(returnData)
         resolve(returnData)
+      })
+      res.on('error', (err) => {
+        console.error(err)
+        reject(err)
       })
     })
   })
@@ -155,7 +159,7 @@ const parseDateString = (dateString) => {
   };
 
   // 创建UTC时间
-  let date = new Date(Date.UTC(year, monthMap[month], day, hour, minute, second));
+  const date = new Date(Date.UTC(year, monthMap[month], day, hour, minute, second));
 
   // 处理时区偏移（例如 +0800）
   const timezoneOffsetHours = parseInt(timezone.slice(0, 3), 10);
