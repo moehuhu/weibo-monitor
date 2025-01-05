@@ -43,19 +43,23 @@ export function apply(ctx: Context, config: Config) {
   ctx.setInterval(async () => {
     for (const singleConfig of config.sendINFO) {
       const params = { ...commonConfig, ...singleConfig }
-      const [err, res] = await to(getWeibo(params))
-      if (err) { console.error(err); return }
-      const data = res.data || {}
-      const weiboList = data.list || []
-      const latestWeibo = weiboList[0] || {}
-      let message = getMessage(params, latestWeibo)
-      if (!message) { continue }
-      if (params.sendAll) {
-        message = '<at id="all"/> ' + message
-      }
-      ctx.bots[`${config.plantform}:${config.account}`].sendMessage(params.groupID, message)
+      getWeiboAndSendMessageToGroup(ctx, params)
     }
   }, config.waitMinutes > 0 ? config.waitMinutes * 60 * 1000 : 60000)
+}
+
+const getWeiboAndSendMessageToGroup = async (ctx: Context, params: any) => {
+  const [err, res] = await to(getWeibo(params))
+  if (err) { console.error(err); return }
+  const data = res.data || {}
+  const weiboList = data.list || []
+  const latestWeibo = weiboList[0] || {}
+  let message = getMessage(params, latestWeibo)
+  if (!message) { return }
+  if (params.sendAll) {
+    message = '<at id="all"/> ' + message
+  }
+  ctx.bots[`${params.plantform}:${params.account}`].sendMessage(params.groupID, message)
 }
 
 const getMessage = (params: any, latestWeibo: any): string => {
@@ -98,6 +102,7 @@ const getMessage = (params: any, latestWeibo: any): string => {
   const url = `\n链接：https://m.weibo.cn/status/${mid}`
   return message ? message + url : (screenName + " 发布了微博:\n" + latestWeibo?.text_raw + url) || ''
 }
+
 const getWeibo = async (config: any, callback?: any): Promise<any> => {
   const { weiboUID } = config
   if (!weiboUID) { return }
