@@ -14,9 +14,9 @@ export const Config: Schema<Config> = Schema.object({
   plantform: Schema.string().default("onebot").description("账号平台"),
   waitMinutes: Schema.number().default(3).min(1).description("隔多久拉取一次最新微博 (分钟)"),
   sendINFO: Schema.array(Schema.object({
-    sendAll: Schema.boolean().default(false).description("@全体"),
-    weiboUID: Schema.string().description("微博UID"),
+    weiboUID: Schema.string().description("微博用户UID"),
     groupID: Schema.string().description("需要发送的群组"),
+    sendAll: Schema.boolean().default(false).description("@全体成员"),
   })).description("监听&发送配置"),
 })
 
