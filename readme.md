@@ -12,6 +12,6 @@ koishi机器人微博动态更新推送插件，用来获取指定微博用户�
 - platform: 聊天消息平台 (默认为onebot)
 - waitMinutes: 隔多久拉取一次最新微博 (单位为分钟)
 - sendINFO：监听&发送配置
-  - sendAll: @全体成员
   - weiboUID: 微博用户UID (手机端进微博用户页，进入右上角选项菜单，复制链接`https://weibo.com/u/XXXXXXXXXX`，结尾一串数字即UID，将数字复制下来填入即可)
   - groupID: 需要发送的群组
+  - sendAll: @全体成员
