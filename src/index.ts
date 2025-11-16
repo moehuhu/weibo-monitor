@@ -132,13 +132,11 @@ const getWeibo = async (config: any, callback?: any): Promise<any> => {
           callback?.(returnData)
           resolve(returnData)
         } catch (error) {
-          console.error(error)
           reject({ error, body })
         }
       })
-      res.on('error', (err) => {
-        console.error(err)
-        reject(err)
+      res.on('error', (error) => {
+        reject({ error, body })
       })
     })
   })
