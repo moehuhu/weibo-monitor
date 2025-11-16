@@ -50,7 +50,7 @@ export function apply(ctx: Context, config: Config) {
 
 const getWeiboAndSendMessageToGroup = async (ctx: Context, params: any) => {
   const [err, res] = await to(getWeibo(params))
-  if (err) { console.error(err); return }
+  if (err) { ctx.logger.error(err); return }
   const data = res.data || {}
   const weiboList = data.list || []
   const latestWeibo = weiboList[0] || {}
@@ -127,9 +127,14 @@ const getWeibo = async (config: any, callback?: any): Promise<any> => {
         body += chunk
       })
       res.on('end', () => {
-        const returnData = JSON.parse(body);
-        callback?.(returnData)
-        resolve(returnData)
+        try {
+          const returnData = JSON.parse(body);
+          callback?.(returnData)
+          resolve(returnData)
+        } catch (error) {
+          console.error(error)
+          reject({ error, body })
+        }
       })
       res.on('error', (err) => {
         console.error(err)
